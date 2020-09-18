@@ -1,5 +1,8 @@
+from typing import Counter
 import requests
 from flask import Flask, request, jsonify
+from twilio import twiml
+import pycountry
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -16,13 +19,13 @@ covid_status_by_country = 'https://covid19-api.org/api/status/'
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    country = request.args.get('country', None)
     body = request.values.get('Body', None)
-    print(country)
-    if body:
-        # r = requests.get(covid_status_by_country+country)
-        print(body)
-        return body
+    resp = twiml.Response()
+    if request.method == 'POST':
+        try:
+            country = pycountry.countries.lookup(body)
+        except LookupError:
+            return resp.message('Please enter a valid two character country code.')
     else:
         return '<h1>Please specify a country</h1>'
 

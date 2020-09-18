@@ -12,6 +12,7 @@ requests = "*"
 python-dotenv = "*"
 twilio = "*"
 gunicorn = "*"
+pycountry = "*"
 
 [requires]
 python_version = "3.8"
