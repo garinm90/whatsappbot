@@ -30,7 +30,7 @@ def index():
             message.body('Please send a valid country')
             response.append(message)
             print(response)
-            return response
+            return str(response)
     else:
         return '<h1>Please specify a country</h1>'
 
