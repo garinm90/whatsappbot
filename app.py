@@ -35,7 +35,7 @@ def index():
             response.append(message)
             return str(response)
         except LookupError:
-            message.body('Please send a valid country')
+            message.body('Please send a valid 2 digit country i.e. US')
             response.append(message)
             return str(response)
     if request.method == 'GET':
