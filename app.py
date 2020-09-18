@@ -14,11 +14,16 @@ AUTH_TOKEN = os.getenv('AUTH_TOKEN')
 covid_status_by_country = 'https://covid19-api.org/api/status/'
 
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    country = request.args.get('country')
-    r = requests.get(covid_status_by_country+country)
-    return jsonify(r.json())
+    country = request.args.get('country', None)
+    body = request.values.get('Body', None)
+    print(country)
+    if body:
+        # r = requests.get(covid_status_by_country+country)
+        return body
+    else:
+        return '<h1>Please specify a country</h1>'
 
 
 if __name__ == '__main__':
