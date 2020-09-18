@@ -28,7 +28,8 @@ def index():
             country = pycountry.countries.lookup(body)
             r = requests.get(covid_status_by_country + country.alpha_2)
             json_data = r.json()
-            message.body(f'Total cases: {json_data["cases"]} \
+            message.body(f' In the {country.name} there are\
+                            \n Total cases: {json_data["cases"]} \
                             \n Total deaths: {json_data["deaths"]} \
                             \n Total recovered: {json_data["recovered"]} ')
             response.append(message)
