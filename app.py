@@ -1,6 +1,7 @@
 from typing import Counter
 import requests
 from flask import Flask, request, jsonify
+from werkzeug.exceptions import abort
 from twilio.twiml.messaging_response import MessagingResponse, Body, Message
 import pycountry
 import os
@@ -25,14 +26,19 @@ def index():
     if request.method == 'POST':
         try:
             country = pycountry.countries.lookup(body)
-            print(country)
+            r = requests.get(covid_status_by_country + country.alpha_2)
+            json_data = r.json()
+            message.body(f'Total cases: {json_data["cases"]} \
+                            \n Total deaths: {json_data["deaths"]} \
+                            \n Total recovered: {json_data["recovered"]} ')
+            response.append(message)
+            return str(response)
         except LookupError:
             message.body('Please send a valid country')
             response.append(message)
-            print(response)
             return str(response)
-    else:
-        return '<h1>Please specify a country</h1>'
+    if request.method == 'GET':
+        return abort(404)
 
 
 if __name__ == '__main__':
