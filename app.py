@@ -25,7 +25,9 @@ def index():
         try:
             country = pycountry.countries.lookup(body)
         except LookupError:
-            return resp.message('Please enter a valid two character country code.')
+            msg = resp.message(
+                'Please enter a valid two character country code.')
+            return str(msg)
     else:
         return '<h1>Please specify a country</h1>'
 
