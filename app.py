@@ -21,6 +21,7 @@ def index():
     print(country)
     if body:
         # r = requests.get(covid_status_by_country+country)
+        print(body)
         return body
     else:
         return '<h1>Please specify a country</h1>'
