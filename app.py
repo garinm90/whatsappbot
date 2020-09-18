@@ -24,9 +24,11 @@ def index():
     if request.method == 'POST':
         try:
             country = pycountry.countries.lookup(body)
+            print(country)
         except LookupError:
             msg = resp.message(
                 'Please enter a valid two character country code.')
+            print(str(msg))
             return str(msg)
     else:
         return '<h1>Please specify a country</h1>'
