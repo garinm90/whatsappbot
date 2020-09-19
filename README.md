@@ -3,6 +3,7 @@
 - [General info](#general-info)
 - [Technologies](#technologies)
 - [Setup](#setup)
+- [Example](#example)
 
 ## General info
 This project setups a bot you can text via [WhatsApp](https://www.whatsapp.com/) and recieve current stats about Covid-19.
@@ -51,3 +52,18 @@ AUTH_TOKEN=TWILIO_AUTH_KEY_GOES_HERE
 ```
 
 These can be found on the twilio console..
+
+
+## Example
+The example site is located at:
+https://whatsapp-covid-tracker.herokuapp.com
+
+To see the stats presented you must make a POST requests with an arguement of "Body" that contains the two digit country code you're requesting information from. 
+
+Unfortunately there is no way to freely allow whatsapp numbers to text the bot due to limitations of the whatsapp api.
+
+The following command will show the data formatted in xml for twilio.
+
+```
+curl --data "Body=US" https://whatsapp-covid-tracker.herokuapp.com
+```
